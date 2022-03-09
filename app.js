@@ -1,21 +1,21 @@
 const express = require("express");
-var mysql      = require('mysql'); 
+const connection = require("./connection.js"); //import module created ' connection.js'
 require("dotenv").config();//to use environmental variables
-
-
 const app = express();
-const url = " mysql://b3a376e1086f60:cf91152e@us-cdbr-east-05.cleardb.net/heroku_ad7e80e651ce74d?reconnect=true";
+const bodyParser=require("body-parser")
 
-var connection = mysql.createConnection({
-    host     : 'us-cdbr-east-05.cleardb.net',
-    username : 'b3a376e1086f60',
-    password : '',
-    database : 'heroku_ad7e80e651ce74d'
-  });
-   
+const path = require('path');
 
-//   mysql.connect(url);
+// var con = mysql.createConnection({
+//     host     : 'us-cdbr-east-05.cleardb.net',
+//     username : 'b3a376e1086f60',
+//     password : 'cf91152e',
+//     database : 'heroku_ad7e80e651ce74d'
+//   });
    
+app.use(bodyParser.json());
+app.use('/static', express.static('static'))
+
 // production
 
 // This code creates a server listening at the  port specified
@@ -31,3 +31,12 @@ connection.connect(function(err) {
  
   console.log('connected as id ' + connection.threadId);
 });
+
+
+const users =require("./routers/users.js");
+app.use('/users',users);
+
+app.get("/", function (req, res) {
+  res.sendFile(__dirname + "/signup.html");
+});
+
