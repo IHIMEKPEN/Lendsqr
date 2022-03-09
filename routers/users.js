@@ -4,7 +4,7 @@ const connection = require("../connection.js"); //import module created ' connec
 const bodyParser = require("body-parser");
 router.use(bodyParser.json());
 var urlencodedParser = bodyParser.urlencoded({ extended: true })
-app.use(express.urlencoded());
+router.use(express.urlencoded());
 
 // get all users from database
 router.get('/all',(req,res)=>{
