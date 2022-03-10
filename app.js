@@ -3,8 +3,10 @@ const connection = require("./connection.js"); //import module created ' connect
 require("dotenv").config();//to use environmental variables
 const app = express();
 const bodyParser=require("body-parser")
-
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const path = require('path');
+const http = require("http");
 
 // var con = mysql.createConnection({
 //     host     : 'us-cdbr-east-05.cleardb.net',
@@ -15,6 +17,7 @@ const path = require('path');
    
 app.use(bodyParser.json());
 app.use('/static', express.static('static'))
+app.use(express.json());
 
 // production
 
