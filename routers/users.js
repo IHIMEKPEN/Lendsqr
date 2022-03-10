@@ -6,9 +6,10 @@ router.use(bodyParser.json());
 var urlencodedParser = bodyParser.urlencoded({ extended: true });
 // router.use(express.urlencoded());
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // get all users from database
-router.get("/all", (req, res) => {
+router.get("/all", async (req, res) => {
   try {
     // console.log('get request')
     // res.send('get request')
@@ -24,61 +25,76 @@ router.get("/all", (req, res) => {
 });
 
 //signup
-router.post("/signup", urlencodedParser, (req, res) => {
+router.post("/signup", urlencodedParser, async (req, res) => {
   const user = req.body;
 
   // Validate user input
   if (!(user.email && user.password && user.fullname && user.username)) {
     res.status(400).send("All input is required");
-  }
-
-  bcrypt.hash(user.password, 10, function (err, hash) {
-    let insertQuery = `insert into users(email, username, fullname, password) 
+  } else {
+    bcrypt.hash(user.password, 10, function (err, hash) {
+      let insertQuery = `insert into users(email, username, fullname, password) 
                        values('${user.email}', '${user.username}','${user.fullname}' , '${hash}') `;
-    const responseData = {
-      Status: "Successful",
-      Message: `Account created ${user.username}`,
-    };
+      const responseData = {
+        Status: "Successful",
+        Message: `Account created ${user.username}`,
+      };
 
-    const jsonContent = JSON.stringify(responseData);
-    connection.query(insertQuery, (err, result) => {
-      if (!err) {
-        res.send(jsonContent);
-        // res.redirect("/sendfunds", jsonContent);
-      } else {
-        console.log(err.message);
-      }
+      const jsonContent = JSON.stringify(responseData);
+      connection.query(insertQuery, (err, result) => {
+        if (!err) {
+          res.send(jsonContent);
+          // res.redirect("/sendfunds", jsonContent);
+        } else {
+          console.log(err.message);
+        }
+      });
+      connection.end;
     });
-    connection.end;
-  });
-  // console.log('Got body:', req.body);
-  // res.sendStatus(200);
+  }
+  
 });
 
-// Update User by username
+//login
 
-router.put("/users/:username", (req, res) => {
-  let user = req.body;
-  let updateQuery = `update users
-                         set fullname = '${user.fullname}',
-                         email = '${user.email}'
-                         
-                         where username = ${user.username}`;
+router.post("/login", urlencodedParser, async (req, res) => {
+  // Our login logic starts here
 
-  connection.query(updateQuery, (err, result) => {
-    const responseData = {
-      Status: "Successful",
-      Message: `${user.username} your info has been updated`,
-    };
+  // Get user input
+  const userlogin = req.body;
+  console.log(userlogin);
 
-    const jsonContent = JSON.stringify(responseData);
-    if (!err) {
-      res.send(jsonContent);
-    } else {
-      console.log(err.message);
+  try {
+    const row = connection.query(
+      `SELECT * FROM users WHERE email LIKE '${userlogin.email}'`
+    );
+    // const jsonContent = JSON.stringify(row);
+    console.log("row " + row);
+    if (row.length === 0) {
+      return res.status(422).json({
+        message: "Invalid email address",
+      });
     }
-  });
-  connection.end;
+
+    const passMatch = await bcrypt.compare(userlogin.password, row[0].password);
+    if (!passMatch) {
+      return res.status(422).json({
+        message: "Incorrect password",
+      });
+    }
+
+    const theToken = jwt.sign({ id: row[0].id }, "the-super-strong-secrect", {
+      expiresIn: "1h",
+    });
+
+    return res.json({
+      token: theToken,
+    });
+  } catch (err) {
+    res.send("Error" + err);
+  }
+
+  // Our login logic ends here
 });
 
 module.exports = router;

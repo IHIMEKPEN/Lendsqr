@@ -39,7 +39,14 @@ connection.connect(function(err) {
 const users =require("./routers/users.js");
 app.use('/users',users);
 
-app.get("/", function (req, res) {
+app.get("/signup", function (req, res) {
   res.sendFile(__dirname + "/signup.html");
+});
+
+app.get("/login", function (req, res) {
+  res.sendFile(__dirname + "/login.html");
+});
+app.get("/account", function (req, res) {
+  res.sendFile(__dirname + "/account.html");
 });
 
