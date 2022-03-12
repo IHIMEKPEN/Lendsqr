@@ -56,7 +56,10 @@ user.email , function(err , data){
           const jsonContent = JSON.stringify(responseData);
           connection.query(insertQuery, (err, result) => {
             if (!err) {
-              res.send(jsonContent);
+              res.send({
+                Status: "Successful",
+                Message: `Account created ${user.username}`,
+              });
               return;
               // res.redirect("/sendfunds", jsonContent);
             } else {
@@ -81,14 +84,12 @@ router.put("/fundwallet", urlencodedParser, async (req, res) => {
                        where email LIKE '${user.email}'`;
 
   connection.query(updateQuery, (err, result) => {
-    const responseData = {
-      Status: "Successful",
-      Message: `Accounted funded with ${user.amount} in ${user.email}`,
-    };
-
-    const jsonContent = JSON.stringify(responseData);
+    
     if (!err) {
-      res.send(jsonContent);
+      res.send({
+        Status: "Successful",
+        Message: `Accounted funded with ${user.amount} in ${user.email}`,
+      });
     } else {
       console.log(err.message);
     }
@@ -107,15 +108,13 @@ router.put("/withdraw", urlencodedParser, async (req, res) => {
                        where email LIKE '${user.email}'`;
 
   connection.query(updateQuery, (err, result) => {
-    const responseData = {
-      Status: "Successful",
-      Message: `Withdrawl of  ${user.amount} from ${user.email} Successful`,
-      Prompt: "Take your cash ",
-    };
-
-    const jsonContent = JSON.stringify(responseData);
+   
     if (!err) {
-      res.send(jsonContent);
+      res.send({
+        Status: "Successful",
+        Message: `Withdrawl of ${user.amount} from ${user.email} Successful`,
+        Prompt: "Take your cash ",
+      });
     } else {
       console.log(err.message);
     }
@@ -135,14 +134,12 @@ router.put("/transferfund", urlencodedParser, async (req, res) => {
                        where email LIKE '${user.fromemail}'`;
 
       connection.query(updateQuery, (err, result) => {
-        const responseData = {
-          Status: "Successful",
-          Message: `  ${user.amount} transferred to  ${user.toemail} from ${user.fromemail} `,
-        };
-
-        const jsonContent = JSON.stringify(responseData);
+        
         if (!err) {
-          res.send(jsonContent);
+          res.send({
+            Status: "Successful",
+            Message: ` ${user.amount} transferred to ${user.toemail} from ${user.fromemail} `,
+          });
           return;
         } else {
           console.log(err.message);

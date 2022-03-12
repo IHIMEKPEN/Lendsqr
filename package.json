@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --config --forceExit"
   },
   "author": "ihimekpen osemudiamen",
   "license": "ISC",
@@ -17,10 +17,13 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
+    "faker": "^6.6.6",
     "jsonwebtoken": "^8.5.1",
     "mysql": "github:mysqljs/mysql",
     "mysql-schema": "^1.0.0",
     "pm2": "^5.2.0",
+    "random-email": "^1.0.3",
+    "unique-username-generator": "^1.0.1",
     "unirest": "^0.6.0"
   },
   "devDependencies": {
