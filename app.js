@@ -46,7 +46,8 @@ app.get("/signup", function (req, res) {
 app.get("/login", function (req, res) {
   res.sendFile(__dirname + "/login.html");
 });
-app.get("/account", function (req, res) {
+app.get("/wallet", function (req, res) {
   res.sendFile(__dirname + "/account.html");
 });
 
+module.exports = app;

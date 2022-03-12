@@ -12,20 +12,22 @@
 
 <body>
     <div id="login-box">
-
-
         <div class="left">
-            <a>Withdraw Funds</a>
+            <form action="/users/fundwallet" method="put">
+                <input type="number" name="amount" placeholder="Amount" />
+                
+                <input type="text" name="email" placeholder="E-mail" />
+                
+    
+                <input type="submit" name="signup_submit"  />
+
+            </form>
+            
+
+           
         </div>
 
-        <div class="right">
-            <a>Transfer Funds</a>
-        </div>
-
-        <div class="down">
-            <a>Fund Account</a>
-        </div>
-
+        <div class="right"><h1>Wallet</h1></div>
     </div>
 
 </body>
