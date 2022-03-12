@@ -20,6 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql": "github:mysqljs/mysql",
     "mysql-schema": "^1.0.0",
+    "pm2": "^5.2.0",
     "unirest": "^0.6.0"
   },
   "devDependencies": {
