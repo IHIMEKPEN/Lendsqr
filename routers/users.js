@@ -233,4 +233,4 @@ router.put("/transferfund",auth, urlencodedParser, async (req, res) => {
   // }
 });
 
-module.exports = {router,auth};
+module.exports = router;
