@@ -27,6 +27,10 @@ function auth(req,res,next) {
  
 };
 
+router.get("/authentication", urlencodedParser, async (req, res) => {
+  const accessToken=req.header('accessToken');
+  return accessToken;
+});
 
 //login
 router.post("/login", urlencodedParser, async (req, res) => {
@@ -54,7 +58,7 @@ router.post("/login", urlencodedParser, async (req, res) => {
         // console.log("---------> Generating accessToken")
         const token = generateAccessToken({ user: user.email })
         // console.log(token)
-        res.header('accessToken', token ).send({ accessToken: token , Message:`${user.email} is logged in!`})
+        res.header('accessToken', token ).send({ Message:`${user.email} is logged in!`})
         
       }
       else {

@@ -1,4 +1,4 @@
-FROM node:9-slim
+FROM node:12.18.1
 
 #  where our application files goes to
 RUN mkdir -p /app

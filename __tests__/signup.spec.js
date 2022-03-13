@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 var randomEmail = require('random-email');
 const genUsername = require("unique-username-generator");
+
+// jest.setTimeout(30000);
+
 // add three random digits
 const usernamee = genUsername.generateFromEmail(
     "lakshmi.narayan@example.com",
@@ -33,11 +36,33 @@ const transferfundInput = {
     fromemail: "oihimekpen@gmail.com",//change
     amount: 200   
 };
+const loginInput = {
+    email: "test1113@example.com",//change
+    password: "Password123"//change
+      
+};
 
+const loginOutput = {"Message":`${loginInput.email} is logged in!`};
 const userOutput = { "Status": "Successful", "Message": `Account created ${userInput.username}` };
 const fundwalletOutput = {"Status":"Successful","Message":"Accounted funded with 400 in test1113@example.com"};//change
 const withdrawOutput = {"Status":"Successful","Message":"Withdrawl of 400 from oihimekpen@gmail.com Successful","Prompt":"Take your cash "};//change
 const transferfundOutput = {"Status":"Successful","Message":" 200 transferred to test1113@example.com from oihimekpen@gmail.com "};//change
+
+// let accessToken = '';
+
+// beforeAll(async () => {
+//   const response = await request(app).get('/users/authentication');
+//   accessToken = response.header.accessToken;
+// });
+
+it("login - success", async () => {
+
+
+    const { body } = await request(app).post("/users/login").send(loginInput).set('accesToken', `${accessToken}`);;
+    expect(body).toEqual(loginOutput);
+    // expect(body.statusCode).toEqual(200);
+   
+});
 
 it("signup - success", async () => {
 
