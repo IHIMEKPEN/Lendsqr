@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 var randomEmail = require('random-email');
 const genUsername = require("unique-username-generator");
-
+const auth= require("../routers/users");
+console.log(auth)
 // jest.setTimeout(30000);
 
 // add three random digits

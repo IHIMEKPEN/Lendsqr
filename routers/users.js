@@ -47,7 +47,7 @@ router.post("/login", urlencodedParser, async (req, res) => {
     if (err) throw (err)
     if (result.length == 0) {
       console.log("--------> User does not exist")
-      res.sendStatus(404)
+      res.send("--------> User does not exist").Status(404)
     }
     else {
       const hashedPassword = result[0].password
@@ -233,4 +233,4 @@ router.put("/transferfund",auth, urlencodedParser, async (req, res) => {
   // }
 });
 
-module.exports = router;
+module.exports = {router,auth};
