@@ -47,6 +47,10 @@ Ihimekpen Osemudiamen Andrew
 
 <img width="1280" alt="Screen Shot 2022-03-13 at 13 41 39" src="https://user-images.githubusercontent.com/75396799/158059874-558596a5-ba40-4488-b758-6c28b335ce05.png">
 
-12. 
+12. to access transfer fund wallet http://localhost:3000/users/transferfund make sure its a 'PUT' request and move to the header and add the access token  again you grabbed earlier and input it there. note your key for the token is case sensitive to it should be "accessToken".This token expires after 15hrs and can be adjusted if you like.<img width="1280" alt="Screen Shot 2022-03-13 at 13 47 12" src="https://user-images.githubusercontent.com/75396799/158060033-7aec485a-f3b6-4cfe-88a1-7408209602ae.png">
+
+13. to access withdraw fund wallet http://localhost:3000/users/withdraw make sure its a 'PUT' request and move to the header and add the access token  again you grabbed earlier and input it there. note your key for the token is case sensitive to it should be "accessToken".This token expires after 15hrs and can be adjusted if you like.<img width="1280" alt="Screen Shot 2022-03-13 at 13 49 09" src="https://user-images.githubusercontent.com/75396799/158060105-731c3b11-7ece-4534-8bf6-c31da4dd32c8.png">
+
+
 
 
