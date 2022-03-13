@@ -2,10 +2,10 @@ var mysql = require('mysql');
 require("dotenv").config();//to use environmental variables
 
 var db_config = { 
-    host: 'us-cdbr-east-05.cleardb.net', 
-    user: 'b3a376e1086f60', 
-    password: 'cf91152e', 
-    database: 'heroku_ad7e80e651ce74d', };
+    host: process.env.HOST, 
+    user: process.env.USER, 
+    password: process.env.PASSWORD, 
+    database: process.env.DATABASE, };
 
 // var connection = mysql.createConnection(db_config);
 // var connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
