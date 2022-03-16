@@ -56,3 +56,7 @@ Ihimekpen Osemudiamen Andrew
 
 https://lendsqrproject.herokuapp.com/
 
+# Notes
+
+Account balances can read negative if there isn't money in the account 
+
