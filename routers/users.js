@@ -7,30 +7,32 @@ var urlencodedParser = bodyParser.urlencoded({ extended: true });
 // router.use(express.urlencoded());
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+var auth =require("../auth").auth;
+var generateAccessToken = require("../gentoken").gentoken;
 
-function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15h" });
-  
-};
+// function generateAccessToken(user) {
+//   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15h" });
 
-function auth(req,res,next) {
-  const token = req.header('accessToken');
-  if (!token) return res.status(401).send('Access Denied');
-  try{
-    const verified =jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
-    req.user=verified;
-    next();
-  }catch(err){
-    res.status(400).send('Invalid Token');
+// };
 
-  }
- 
-};
+// function auth(req, res, next) {
+//   const token = req.header('accessToken');
+//   if (!token) return res.status(401).send('Access Denied');
+//   try {
+//     const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+//     req.user = verified;
+//     next();
+//   } catch (err) {
+//     res.status(400).send('Invalid Token');
 
-router.get("/authentication", urlencodedParser, async (req, res) => {
-  const accessToken=req.header('accessToken');
-  return accessToken;
-});
+//   }
+
+// };
+
+// router.get("/authentication", urlencodedParser, async (req, res) => {
+//   const accessToken = req.header('accessToken');
+//   return accessToken;
+// });
 
 //login
 router.post("/login", urlencodedParser, async (req, res) => {
@@ -58,8 +60,8 @@ router.post("/login", urlencodedParser, async (req, res) => {
         // console.log("---------> Generating accessToken")
         const token = generateAccessToken({ user: user.email })
         // console.log(token)
-        res.header('accessToken', token ).send({ Message:`${user.email} is logged in!`})
-        
+        res.header('accessToken', token).send({ Message: `${user.email} is logged in!` })
+
       }
       else {
         console.log("---------> Password Incorrect")
@@ -136,7 +138,7 @@ router.post("/signup", urlencodedParser, async (req, res) => {
 });
 
 //fund wallet
-router.put("/fundwallet",auth, urlencodedParser, async (req, res) => {
+router.put("/fundwallet", auth, urlencodedParser, async (req, res) => {
   let user = req.body;
   // console.log(user)
   let updateQuery = `update users
@@ -160,7 +162,7 @@ router.put("/fundwallet",auth, urlencodedParser, async (req, res) => {
 });
 
 //withdraw from wallet
-router.put("/withdraw",auth, urlencodedParser, async (req, res) => {
+router.put("/withdraw", auth, urlencodedParser, async (req, res) => {
   let user = req.body;
   // console.log(user)
   let updateQuery = `update users
@@ -185,7 +187,7 @@ router.put("/withdraw",auth, urlencodedParser, async (req, res) => {
 });
 
 //fund wallet
-router.put("/transferfund",auth, urlencodedParser, async (req, res) => {
+router.put("/transferfund", auth, urlencodedParser, async (req, res) => {
   let user = req.body;
   for (let i = 0; i < 2; i++) {
     if (i === 0) {

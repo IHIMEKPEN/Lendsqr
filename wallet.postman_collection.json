@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "f30f6c6c-57b2-46ff-bb3f-6f7ce0a783d9",
+		"name": "wallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// test for  signup",
+							"",
+							"// test to Check if signup status code is 200",
+							"pm.test(\"Check if signup status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// test to Check if adding a user response is Successful",
+							"",
+							"pm.test(\"Check if signup status is Successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.Status).to.eql(\"Successful\");",
+							"});",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let date =Date.now();",
+							"let email='wenddy.'+ date +'@gmail.com';",
+							"let name='wenddy.'+ date ;",
+							"pm.environment.set('useremail',email);",
+							"pm.environment.set('usernamee',name);",
+							"console.log(email)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{usernamee}}",
+							"type": "text"
+						},
+						{
+							"key": "fullname",
+							"value": "ihimekpen osemudiamen",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "{{useremail}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "painful",
+							"type": "text"
+						},
+						{
+							"key": "password2",
+							"value": "painful",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lendsqrproject.herokuapp.com/users/signup",
+					"protocol": "https",
+					"host": [
+						"lendsqrproject",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// test for  login",
+							"",
+							"// test to Check if login status code is 200",
+							"pm.test(\"Check if login status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// test to Check if adding a user response is Successful",
+							"",
+							"pm.test(\"Check if login status is Successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.Status).to.eql(\"`${useremail}` is logged in!\");",
+							"});",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "test1113@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Password123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lendsqrproject.herokuapp.com/users/login",
+					"protocol": "https",
+					"host": [
+						"lendsqrproject",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fund wallet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// test if the status code to fund wallet is 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check if update  a user by id status is Successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.Status).to.eql(\"Successful\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdDUxM0BleGFtcGxlLmNvbSIsImlhdCI6MTY0NzE3NTEwMSwiZXhwIjoxNjQ3MjI5MTAxfQ.F4ygl_NtIhgitfWkuFCGWxptDi5IBoHEqQlgA3yoOQ4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "amount",
+							"value": "3000",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "feyi@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lendsqrproject.herokuapp.com/users/fundwallet",
+					"protocol": "https",
+					"host": [
+						"lendsqrproject",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"fundwallet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transferfund",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// test if the status code to transfer funds from wallet is 200",
+							"pm.test(\"Status code to transfer funds from wallet is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check if to transfer funds from wallet is Successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.Status).to.eql(\"Successful\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdDUxM0BleGFtcGxlLmNvbSIsImlhdCI6MTY0NzE3NTEwMSwiZXhwIjoxNjQ3MjI5MTAxfQ.F4ygl_NtIhgitfWkuFCGWxptDi5IBoHEqQlgA3yoOQ4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "amount",
+							"value": "200",
+							"type": "text"
+						},
+						{
+							"key": "fromemail",
+							"value": "oihimekpen@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "toemail",
+							"value": "feyi@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lendsqrproject.herokuapp.com/users/transferfund",
+					"protocol": "https",
+					"host": [
+						"lendsqrproject",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"transferfund"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "withdraw funds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// test if the status code to withdraw from wallet is 200",
+							"pm.test(\"Status code to withdraw from wallet is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check if to withdraw from wallet is Successful\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.Status).to.eql(\"Successful\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdDUxM0BleGFtcGxlLmNvbSIsImlhdCI6MTY0NzE3NTEwMSwiZXhwIjoxNjQ3MjI5MTAxfQ.F4ygl_NtIhgitfWkuFCGWxptDi5IBoHEqQlgA3yoOQ4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "amount",
+							"value": "400",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "oihimekpen@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lendsqrproject.herokuapp.com/users/withdraw",
+					"protocol": "https",
+					"host": [
+						"lendsqrproject",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"withdraw"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
