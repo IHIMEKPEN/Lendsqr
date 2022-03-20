@@ -77,6 +77,7 @@ const userOutput = { "Status": "Successful", "Message": `Account created ${userI
 
 // });
 describe('signup Endpoint', () => {
+
     test("signup - success", async () => {
 
         const response = await request(app).post("/users/signup").send(userInput);
@@ -85,6 +86,7 @@ describe('signup Endpoint', () => {
 
 
     });
+    
     test("signup - failure", async () => {
 
         const response = await request(app).post("/users/signup").send(userInput);
@@ -93,20 +95,10 @@ describe('signup Endpoint', () => {
 
 
     });
+
 });
 
-// it("fundwallet - success", async () => {
 
-
-//     supertest(app).put("/users/fundwallet").mockResolvedValue({
-//         "Status": "Successful",
-//         "Message": `Accounted funded with 3000 in ${fundwalletInput.email}`
-//     });
-//     supertest(app).put("/users/fundwallet").send(fundwalletInput);
-
-//     expect(response.body).toEqual(fundwalletOutput);
-//     // expect(response.statusCode).toEqual(200);
-// });
 
 // it("withdraw - success", async () => {
 

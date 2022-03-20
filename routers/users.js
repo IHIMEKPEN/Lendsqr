@@ -10,29 +10,6 @@ const jwt = require("jsonwebtoken");
 var auth =require("../auth").auth;
 var generateAccessToken = require("../gentoken").gentoken;
 
-// function generateAccessToken(user) {
-//   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15h" });
-
-// };
-
-// function auth(req, res, next) {
-//   const token = req.header('accessToken');
-//   if (!token) return res.status(401).send('Access Denied');
-//   try {
-//     const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-//     req.user = verified;
-//     next();
-//   } catch (err) {
-//     res.status(400).send('Invalid Token');
-
-//   }
-
-// };
-
-// router.get("/authentication", urlencodedParser, async (req, res) => {
-//   const accessToken = req.header('accessToken');
-//   return accessToken;
-// });
 
 //login
 router.post("/login", urlencodedParser, async (req, res) => {

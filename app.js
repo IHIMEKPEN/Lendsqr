@@ -6,7 +6,7 @@ const bodyParser = require("body-parser")
 
 
 app.use(bodyParser.json());
-app.use('/static', express.static('static'))
+app.use('/static', express.static('static'))//load static files
 app.use(express.json());
 
 

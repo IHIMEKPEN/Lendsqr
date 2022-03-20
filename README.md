@@ -60,5 +60,14 @@ https://lendsqrproject.herokuapp.com/
 
 • Account balances can read negative if there isn't money in the account 
 
-• Before running test go to server.js and comment the production and uncomment the development code to avoid failure due to timeout during testing
+• Before running test go to server.js and connection.js and comment the production and uncomment the development code to avoid failure due to timeout during testing
 
+• Environmental variables needs to be set for:
+
+ACCESS_TOKEN_SECRET,
+CLEARDB_DATABASE_URL,
+PORT,
+HOST,
+USER,
+PASSWORD,
+DATABASE,
